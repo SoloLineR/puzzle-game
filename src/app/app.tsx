@@ -1,11 +1,9 @@
-import { Button } from "@/components/ui/button";
+import { ImageUploader } from "@/modules/ImageUploader/ImageUploader";
 
 export const App = () => {
   return (
     <div>
-      <Button variant={"outline"} className="cursor-pointer">
-        click me
-      </Button>
+      <ImageUploader />
     </div>
   );
 };
