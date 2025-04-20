@@ -110,6 +110,11 @@
   --sidebar-ring: oklch(0.646 0.222 41.116);
 }
 
+@utilitys {
+  .container {
+    @apply mx-auto;
+  }
+}
 @layer base {
   * {
     @apply border-border outline-ring/50;

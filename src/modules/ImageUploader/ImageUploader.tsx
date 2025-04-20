@@ -1,6 +1,7 @@
 import { Input } from "@/components/ui/input";
 import { useEffect, useState } from "react";
-
+import { toast } from "sonner";
+import { allowedTypes, maxSizeBytes } from "./constants";
 export const ImageUploader = () => {
   const [selectedImg, setSelectedImg] = useState<string>();
   const [error, setError] = useState<string | null>(null);
@@ -27,18 +28,20 @@ export const ImageUploader = () => {
       return;
     }
 
-    const allowedTypes = ["image/jpeg", "image/png", "image/webp", "image/svg"];
     if (!allowedTypes.includes(file.type)) {
       setError("Недопустимый формат файла. Выберите JPEG, PNG, WEBP или SVG.");
+      toast.error(
+        "Недопустимый формат файла. Выберите JPEG, PNG, WEBP или SVG."
+      );
       setInputKey((prevKey) => prevKey + 1);
       return;
     }
 
-    const maxSizeBytes = 5 * 1024 * 1024;
     if (file.size > maxSizeBytes) {
       const maxSizeMB = maxSizeBytes / (1024 * 1024);
       setError(`Файл слишком большой. Максимальный размер: ${maxSizeMB} MB.`);
       setInputKey((prevKey) => prevKey + 1);
+      toast.error("Файл слишком большой. Максимальный размер: 5 MB.");
       return;
     }
     try {
@@ -54,25 +57,26 @@ export const ImageUploader = () => {
       setError("Не удалось создать предварительный просмотр изображения.");
       // Если ошибка при создании URL, сбрасываем инпут
       setInputKey((prevKey) => prevKey + 1);
+      toast.error("Не удалось создать предварительный просмотр изображения.");
     }
   };
 
   return (
-    <div>
+    <div className="flex flex-col items-center">
       <Input
         key={inputKey}
         type="file"
         accept="image/jpeg, image/png, image/svg, image/webp"
         onChange={handleFileChange}
+        className="max-w-[400px]"
       />
-      {error && <p className="text-red-500 text-sm mt-2">{error}</p>}
       {selectedImg && !error && (
         <img
           src={selectedImg}
-          width={200}
-          height={200}
+          width={400}
+          height={400}
           alt="Предварительный просмотр изображения"
-          className="object-contain max-h-[200px] mt-2"
+          className="object-contain max-h-[400px] mt-2"
         />
       )}
     </div>
