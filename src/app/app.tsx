@@ -1,11 +1,12 @@
 import { Toaster } from "@/components/ui/sonner";
-import { ImageUploader } from "@/modules/ImageUploader/ImageUploader";
+
 import { Layout } from "@/components/ui/layout";
+import { PuzzleBoard } from "@/modules/PuzzleBoard/PuzzleBoard";
 export const App = () => {
   return (
     <main>
       <Layout>
-        <ImageUploader />
+        <PuzzleBoard />
         <Toaster position="top-right" />
       </Layout>
     </main>
