@@ -10,7 +10,7 @@ export const PuzzlePiece = ({
   return (
     <img
       src={imgUrl}
-      className={"border box-border block w-full h-auto curosr-pointer"}
+      className={'curosr-pointer box-border block h-auto w-full border'}
       onClick={() => onPieceClick && onPieceClick(index)}
       alt="puzzle piece"
     />
